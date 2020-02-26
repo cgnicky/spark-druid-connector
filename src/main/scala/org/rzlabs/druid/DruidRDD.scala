@@ -94,7 +94,7 @@ class DruidRDD(sqlContext: SQLContext,
     val druidExecTime = System.currentTimeMillis() - queryStartTime
     var numRows: Int = 0
 
-    context.addTaskCompletionListener { taskContext =>
+    context.addTaskCompletionListener[Unit] { taskContext =>
       // TODO: add Druid query metrics.
       resultIter.closeIfNeeded()
     }
@@ -290,4 +290,3 @@ object DruidValTransform {
 
 
 }
-

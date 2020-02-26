@@ -2,8 +2,8 @@
 val sparkVersion = "2.3.0"
 val json4sVersion = "3.6.0-M2"
 val jodaVersion = "2.9.9"
-val curatorVersion = "4.0.1"
-val jacksonVersion = "2.6.5"
+val curatorVersion = "4.2.0"
+val jacksonVersion = "2.7.9"
 val apacheHttpVersion = "4.5.5"
 
 val myDependencies = Seq(
@@ -24,8 +24,8 @@ val myDependencies = Seq(
 lazy val commonSettings = Seq(
   organization := "org.rzlabs",
   version := "0.1.0-SNAPSHOT",
-  
-  scalaVersion := "2.11.8"
+
+  scalaVersion := "2.12.10"
 )
 
 lazy val root = (project in file("."))
