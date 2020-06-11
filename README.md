@@ -3,7 +3,7 @@
 A library for querying Druid data sources with Apache Spark.
 # Compatability
 
-This libaray is compatable with Spark-2.x and Druid-0.9.0+
+This libaray is compatable with Spark-2.x/Spark-3.0 and Druid-0.14.0+
 
 # Usage
 
