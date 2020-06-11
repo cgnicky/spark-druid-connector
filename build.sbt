@@ -1,9 +1,9 @@
 
-val sparkVersion = "2.3.0"
+val sparkVersion = "2.4.0"
 val json4sVersion = "3.6.0-M2"
 val jodaVersion = "2.9.9"
 val curatorVersion = "4.2.0"
-val jacksonVersion = "2.7.9"
+val jacksonVersion = "2.10.0" //"2.7.9"
 val apacheHttpVersion = "4.5.5"
 
 val myDependencies = Seq(
@@ -23,7 +23,7 @@ val myDependencies = Seq(
 
 lazy val commonSettings = Seq(
   organization := "org.rzlabs",
-  version := "0.1.0-SNAPSHOT",
+  version := "0.1.1-SNAPSHOT",
 
   scalaVersion := "2.12.10"
 )
@@ -34,3 +34,24 @@ lazy val root = (project in file("."))
     name := "spark-druid-connector",
     libraryDependencies ++= myDependencies
   )
+
+assemblyMergeStrategy in assembly := {
+  case "reference.conf" => MergeStrategy.concat
+  case PathList("META-INF", inf@_*) =>
+    inf map {
+      _.toLowerCase
+    } match {
+      case ("manifest.mf" :: Nil) | ("index.list" :: Nil) | ("dependencies" :: Nil) =>
+        MergeStrategy.discard
+      case ps@(x :: inf) if ps.last.endsWith(".sf") || ps.last.endsWith(".dsa") =>
+        MergeStrategy.discard
+      case "plexus" :: inf =>
+        MergeStrategy.discard
+      case "services" :: inf =>
+        MergeStrategy.filterDistinctLines
+      case ("spring.schemas" :: Nil) | ("spring.handlers" :: Nil) =>
+        MergeStrategy.filterDistinctLines
+      case _ => MergeStrategy.first
+    }
+  case _ => MergeStrategy.first
+}
